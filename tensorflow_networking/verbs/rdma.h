@@ -227,8 +227,6 @@ class RdmaMemoryMgr {
   std::vector<MemoryRegionPtr> mrs_ GUARDED_BY(mrs_mu_);
 };
 
-bug
-
 // RdmaTensorRequest
 // Represents a single tensor request.
 class RdmaTensorRequest {
