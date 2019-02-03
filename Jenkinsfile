@@ -6,11 +6,6 @@ pipeline {
 		sh 'docker build --tag="jenkins-verbs-docker" -f ./tensorflow_networking/verbs/Dockerfile .'
 	}
     }
-    post {
-        failure {
-            mail to: yanivbl@mellanox.com, subject: 'The verbs build failed :('
-        }
-    }
 }
 
 pipeline {
@@ -19,11 +14,6 @@ pipeline {
         stage('Container-Gdr') {
                 echo "Building gdr using container..."
                 sh 'docker build --tag="jenkins-gdr-docker" -f ./tensorflow_networking/gdr/Dockerfile .'
-        }
-    }
-    post {
-        failure {
-            mail to: yanivbl@mellanox.com, subject: 'The Pipeline failed :('
         }
     }
 }
@@ -36,12 +26,6 @@ pipeline {
                 sh 'docker build --tag="jenkins-mpi-docker" -f ./tensorflow_networking/mpi/Dockerfile .'
     	}
     }
-    post {
-        failure {
-            mail to: yanivbl@mellanox.com, subject: 'The Pipeline failed :('
-        }
-    }
-
 }
 
 
