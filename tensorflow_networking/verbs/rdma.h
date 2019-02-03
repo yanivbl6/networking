@@ -228,7 +228,6 @@ class RdmaMemoryMgr {
 };
 
 bug
-
 // RdmaTensorRequest
 // Represents a single tensor request.
 class RdmaTensorRequest {
