@@ -22,7 +22,7 @@ pipeline {
         stage('Container-Test') {
             steps {
                 echo "Building mpi using container..."
-                sh 'docker build --tag="jenkins-mpi-docker" -f //tensorflow_networking/mpi/Dockerfile .'
+                sh 'docker build --tag="jenkins-mpi-docker" -f ./tensorflow_networking/mpi/Dockerfile .'
             }
         }
     }
