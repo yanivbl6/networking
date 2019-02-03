@@ -1,32 +1,27 @@
 pipeline {
     agent any
-    stages {
-        stage('Build-Verbs') {
-            steps {
-		echo "Building verbs using bazel..."
-		sh 'bazel build -c opt //tensorflow_networking/verbs:verbs_server_lib'
-            }
+        stage('Container-Verbs') {
+		echo "Building verbs using container..."
+		sh 'docker build --tag="jenkins-verbs-docker" -f ./tensorflow_networking/verbs/Dockerfile .'
+	}
+}
+
+pipeline {
+    agent any
+        stage('Container-Gdr') {
+                echo "Building gdr using container..."
+                sh 'docker build --tag="jenkins-gdr-docker" -f ./tensorflow_networking/gdr/Dockerfile .'
         }
-        stage('Build-Gdr') {
-            steps {
-                echo "Building gdr using bazel..."
-                sh 'bazel build -c opt //tensorflow_networking/gdr:gdr_server_lib'
-            }
-        }
-        stage('Build-Mpi') {
-            steps {
-                echo "Building mpi using bazel..."
-                sh 'MPI_HOME=/usr TF_NEED_MPI=1 ./configure && bazel build -c opt //tensorflow_networking/mpi:all'
-            }
-        }
-        stage('Container-Test') {
-            steps {
+}
+
+pipeline {
+    agent any
+        stage('Container-Mpi') {
                 echo "Building mpi using container..."
                 sh 'docker build --tag="jenkins-mpi-docker" -f ./tensorflow_networking/mpi/Dockerfile .'
-            }
         }
-    }
 }
+
 
 
 
